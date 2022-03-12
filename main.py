@@ -6,7 +6,9 @@ from utils import call_zodiac_api
 API_KEY = os.environ['api_key']
 bot = telebot.TeleBot(API_KEY)
 
-
+zodiacs =  [
+            'aquarius', 'scorpio', 'virgo', 'aries', 'leo', 'gemini', 'cancer',
+            'libra', 'sagittarius', 'capricorn', 'pisces', 'taurus']
 @bot.message_handler(commands=['start', 'help'])
 def greet(message):
     bot.send_message(message.chat.id, "Hey! I am the zodiac bot..")
@@ -17,9 +19,7 @@ def greet(message):
 def identify_signs(message):
     time.sleep(1)
     bot.send_message(message.chat.id, "Hmm.. let me see.....")
-    if message.text.lower() in [
-            'aquarius', 'scorpio', 'virgo', 'aries', 'leo', 'gemini', 'cancer',
-            'libra', 'sagittarius', 'capricorn', 'pisces', 'taurus']:
+    if message.text.lower() in zodiacs:
         sign = message.text.lower()
         response = call_zodiac_api(sign)
         response_dict = eval(response.text)
@@ -29,7 +29,7 @@ def identify_signs(message):
         bot.send_message(message.chat.id, f"your luckly color for today is {response_dict['color']}")
         bot.send_message(message.chat.id, f"your luckly number for today is {response_dict['lucky_number']}")
     else:
-      bot.reply_to(message, "This is not a valid zodiac sign you dumb bitch")
+      bot.reply_to(message, "This is not a valid zodiac sign.. try again!")
 
 
 
