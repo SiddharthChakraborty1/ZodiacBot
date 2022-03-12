@@ -20,7 +20,6 @@ def poll_sender(message):
 @bot.poll_answer_handler()
 def handle_poll_answer(pollAnswer):
   print(pollAnswer)
-  bot.send_message(message.chat.id, pollAnswer)
 
 
 @bot.message_handler(func=lambda m: True)
