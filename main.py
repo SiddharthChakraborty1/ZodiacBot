@@ -33,5 +33,8 @@ def identify_signs(message):
 
 
 
-
-bot.infinity_polling()
+while True:
+  try:
+    bot.infinity_polling()
+  except:
+    pass
